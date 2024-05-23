@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "./redux/store";
-import { fetchDog } from "./service/userService";
+import { fetchDog } from "./service/dogService";
 import { Breed } from "./interfaceDataDog/interface";
 
 const App: React.FC = () => {

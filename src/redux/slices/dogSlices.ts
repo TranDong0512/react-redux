@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Breed } from "../../interfaceDataDog/interface";
-import { fetchDog } from "../../service/userService";
+import { fetchDog } from "../../service/dogService";
 
 interface UserState {
   Dog: Breed[];
