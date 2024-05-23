@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "./redux/store";
+import { fetchDog } from "./service/userService";
+import { Breed } from "./interfaceDataDog/interface";
 
-function App() {
+const App: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const dataDogs = useSelector((state: any) => state.dogs);
+  const status = useSelector((state: any) => state.dogs.status);
+  console.log(status);
+
+  const fetchUsers = () => {
+    dispatch(fetchDog());
+  };
+  useEffect(() => {
+    dispatch(fetchDog());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {status === "loading" && <p>Loading...</p>}
+        <ul>
+          {dataDogs.status === "succeeded" &&
+            dataDogs?.Dog?.data.map((dog: Breed, index: number) => (
+              <li key={index}>{dog.attributes.description}</li>
+            ))}
+        </ul>
+        {status === "failed" && (
+          <>
+            <p>Đã có lỗi xảy ra!</p>
+            <button onClick={fetchUsers}>Tải lại</button>
+          </>
+        )}
       </header>
     </div>
   );
-}
+};
 
 export default App;
