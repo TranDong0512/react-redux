@@ -18,7 +18,7 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="App" style={{ marginTop: 24 }}>
       <header className="App-header">
         {status === "loading" && <p>Loading...</p>}
         <ul>
